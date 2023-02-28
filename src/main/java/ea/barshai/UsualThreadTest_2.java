@@ -16,11 +16,12 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Warmup;
 
-// 3
-public class VirtualThreadTest_2 {
+// 1
+public class UsualThreadTest_2 {
+
 
   public static void main(String[] args) throws InterruptedException {
-    VirtualThreadTest_2 vtt = new VirtualThreadTest_2();
+    UsualThreadTest_2 vtt = new UsualThreadTest_2();
     vtt.operatingSystemThreads();
   }
 
@@ -31,15 +32,15 @@ public class VirtualThreadTest_2 {
   @Warmup(iterations = 0)
   @Measurement(iterations = 1, batchSize = 1)
   public void operatingSystemThreads() throws InterruptedException {
-    final List<Callable<String>> tasks =  IntStream.range(0, 10).mapToObj(i -> (
+    final List<Callable<String>> tasks = IntStream.range(0, 10_00).mapToObj(i -> (
         Callable<String>) () -> {
-      System.out.printf("I'm in %s%n", i);
-      return String.format("I try %sth time thread.", i);
-    }).toList();
+          System.out.printf("I'm in %s%n", i);
+          return String.format("I try %sth time thread.", i);
+        }
+    ).toList();
 
-
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-      List<Future<String>> f = executor.invokeAll(tasks);
+    try (var executor = Executors.newCachedThreadPool()) {
+      List<Future<String>> f = executor.invokeAll(tasks); // Если тут поставить брякалку, то станет очевидно, что выполнение заблокировано до выполнения всех Future
       System.out.println(">>> after invokeAll");
       awaitTerminationAfterShutdown(executor);
       f.stream().filter(Future::isDone).forEach(r -> {
