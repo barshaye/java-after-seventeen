@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 import jdk.incubator.concurrent.StructuredTaskScope;
 import org.junit.jupiter.api.Test;
 
+// 5
 class StructuredConcurrencyTest {
 
   @Test
