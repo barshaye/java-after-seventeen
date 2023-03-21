@@ -60,7 +60,7 @@
                     <!--<source>1.9</source>-->
                     <compilerArgs>
                         <arg>--enable-preview</arg>
-                        <arg>--add-modules=jdk.incubator.concurrent</arg>
+                        <arg>--add-modules=jdk.incubator.concurrent,jdk.incubator.vector</arg>
                     </compilerArgs>
                     <forceJavacCompilerUse>true</forceJavacCompilerUse>
                     <parameters>true</parameters>

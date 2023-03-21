@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="JavaAfter17" options="-parameters --enable-preview --add-modules=jdk.incubator.concurrent" />
+      <module name="JavaAfter17" options="-parameters --enable-preview --add-modules=jdk.incubator.concurrent,jdk.incubator.vector" />
     </option>
   </component>
 </project>
